@@ -2,6 +2,7 @@
 
 import { Mail } from "lucide-react";
 import TerminalWindow from "./TerminalWindow";
+import TypedPrompt from "./TypedPrompt";
 import { GithubIcon, LinkedinIcon } from "./icons";
 import { profile } from "@/data/resume";
 import { useTypewriter } from "@/hooks/useTypewriter";
@@ -9,23 +10,16 @@ import { useTypewriter } from "@/hooks/useTypewriter";
 const COMMAND = "whoami --verbose";
 
 export default function Hero() {
-  const { output, done } = useTypewriter(COMMAND, 45, 300);
+  const { output, done } = useTypewriter(COMMAND, 60, 400);
 
   return (
     <section id="about" className="mx-auto w-full max-w-3xl px-4 pt-16 pb-10 sm:pt-24 scroll-mt-16">
       <TerminalWindow title="tushar@portfolio: ~">
-        <p className="text-sm">
-          <span className="text-term-accent">tushar@portfolio</span>
-          <span className="text-term-fg-dim">:</span>
-          <span className="text-term-blue">~</span>
-          <span className="text-term-fg-dim">$ </span>
-          <span className="text-term-fg">{output}</span>
-          <span className="caret-blink text-term-fg">▍</span>
-        </p>
+        <TypedPrompt output={output} done={done} />
 
         <div
-          className={`mt-5 space-y-4 transition-opacity duration-500 ${
-            done ? "opacity-100" : "opacity-0"
+          className={`mt-5 space-y-4 transition-all duration-[1200ms] ease-out ${
+            done ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
           <h1 className="text-2xl font-bold text-term-fg sm:text-3xl">{profile.name}</h1>

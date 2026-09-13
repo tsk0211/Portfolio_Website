@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-export function useTypewriter(text: string, speedMs = 35, startDelayMs = 0) {
+export function useTypewriter(text: string, speedMs = 55, startDelayMs = 0, start = true) {
   const [output, setOutput] = useState("");
   const [done, setDone] = useState(false);
 
   useEffect(() => {
+    if (!start) return;
+
     let i = 0;
     let interval: ReturnType<typeof setInterval>;
 
-    const start = setTimeout(() => {
+    const startTimer = setTimeout(() => {
       interval = setInterval(() => {
         i += 1;
         setOutput(text.slice(0, i));
@@ -22,10 +24,10 @@ export function useTypewriter(text: string, speedMs = 35, startDelayMs = 0) {
     }, startDelayMs);
 
     return () => {
-      clearTimeout(start);
+      clearTimeout(startTimer);
       clearInterval(interval);
     };
-  }, [text, speedMs, startDelayMs]);
+  }, [text, speedMs, startDelayMs, start]);
 
   return { output, done };
 }
