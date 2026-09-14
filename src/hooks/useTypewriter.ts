@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useTypewriter(text: string, speedMs = 55, startDelayMs = 0, start = true) {
   const [output, setOutput] = useState("");
   const [done, setDone] = useState(false);
+  const completedRef = useRef(false);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start || completedRef.current) return;
 
     let i = 0;
     let interval: ReturnType<typeof setInterval>;
@@ -18,6 +19,7 @@ export function useTypewriter(text: string, speedMs = 55, startDelayMs = 0, star
         setOutput(text.slice(0, i));
         if (i >= text.length) {
           clearInterval(interval);
+          completedRef.current = true;
           setDone(true);
         }
       }, speedMs);
