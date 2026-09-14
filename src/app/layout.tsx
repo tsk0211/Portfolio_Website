@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/resume";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${jetbrainsMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-term-bg text-term-fg">{children}</body>
+      <body className="min-h-full flex flex-col bg-term-bg text-term-fg">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-:root {
+:root,
+:root[data-theme="terminal"] {
   --term-bg: #0a0e14;
   --term-bg-elevated: #10151d;
   --term-border: #1f2733;
@@ -11,6 +12,45 @@
   --term-magenta: #ff79c6;
   --term-amber: #ffb454;
   --term-blue: #7aa2f7;
+}
+
+:root[data-theme="mac"] {
+  --term-bg: #1e1e1e;
+  --term-bg-elevated: #262626;
+  --term-border: #3a3a3a;
+  --term-fg: #f2f2f2;
+  --term-fg-dim: #9a9a9a;
+  --term-accent: #32d74b;
+  --term-accent-dim: #1f8f38;
+  --term-magenta: #bf5af2;
+  --term-amber: #ffd60a;
+  --term-blue: #0a84ff;
+}
+
+:root[data-theme="ubuntu"] {
+  --term-bg: #300a24;
+  --term-bg-elevated: #3b0f2d;
+  --term-border: #5a1f45;
+  --term-fg: #f2f2f2;
+  --term-fg-dim: #c9a8c0;
+  --term-accent: #e95420;
+  --term-accent-dim: #a8401a;
+  --term-magenta: #eb6eae;
+  --term-amber: #efb73e;
+  --term-blue: #4a90d9;
+}
+
+:root[data-theme="windows"] {
+  --term-bg: #0c0c0c;
+  --term-bg-elevated: #1a1a1a;
+  --term-border: #333333;
+  --term-fg: #cccccc;
+  --term-fg-dim: #808080;
+  --term-accent: #3a96dd;
+  --term-accent-dim: #24578c;
+  --term-magenta: #c586c0;
+  --term-amber: #d7ba7d;
+  --term-blue: #569cd6;
 }
 
 @theme inline {

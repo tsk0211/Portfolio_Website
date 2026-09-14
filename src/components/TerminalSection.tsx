@@ -16,7 +16,7 @@ export default function TerminalSection({
   children: ReactNode;
 }) {
   const { ref, inView } = useInView<HTMLDivElement>();
-  const { output, done } = useTypewriter(command, 55, 250, inView);
+  const { output, done, restart } = useTypewriter(command, 55, 250, inView);
 
   return (
     <div
@@ -27,7 +27,7 @@ export default function TerminalSection({
     >
       <TerminalWindow title={title}>
         <div className="mb-4">
-          <TypedPrompt output={output} done={done} />
+          <TypedPrompt output={output} done={done} onRun={restart} />
         </div>
         {done && children}
       </TerminalWindow>

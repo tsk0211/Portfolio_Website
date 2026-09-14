@@ -10,12 +10,12 @@ import { useTypewriter } from "@/hooks/useTypewriter";
 const COMMAND = "whoami --verbose";
 
 export default function Hero() {
-  const { output, done } = useTypewriter(COMMAND, 60, 400);
+  const { output, done, restart } = useTypewriter(COMMAND, 60, 400);
 
   return (
     <section id="about" className="mx-auto w-full max-w-3xl px-4 pt-16 pb-10 sm:pt-24 scroll-mt-16">
       <TerminalWindow title="tushar@portfolio: ~">
-        <TypedPrompt output={output} done={done} />
+        <TypedPrompt output={output} done={done} onRun={restart} />
 
         <div
           className={`mt-5 space-y-4 transition-all duration-[1200ms] ease-out ${

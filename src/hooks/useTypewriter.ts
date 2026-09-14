@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useTypewriter(text: string, speedMs = 55, startDelayMs = 0, start = true) {
   const [output, setOutput] = useState("");
   const [done, setDone] = useState(false);
   const completedRef = useRef(false);
+  const [runId, setRunId] = useState(0);
 
   useEffect(() => {
     if (!start || completedRef.current) return;
@@ -29,7 +30,14 @@ export function useTypewriter(text: string, speedMs = 55, startDelayMs = 0, star
       clearTimeout(startTimer);
       clearInterval(interval);
     };
-  }, [text, speedMs, startDelayMs, start]);
+  }, [text, speedMs, startDelayMs, start, runId]);
 
-  return { output, done };
+  const restart = useCallback(() => {
+    completedRef.current = false;
+    setOutput("");
+    setDone(false);
+    setRunId((n) => n + 1);
+  }, []);
+
+  return { output, done, restart };
 }
